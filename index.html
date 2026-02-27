@@ -70,7 +70,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-sm text-slate-400">Spotify Monthly Listeners</p>
-                                <h3 class="text-2xl font-bold mt-1">12,450</h3>
+                                <h3 id="spotify-listeners" class="text-2xl font-bold mt-1">12,450</h3>
                             </div>
                             <div class="p-2 bg-green-900/30 rounded text-green-400"><i data-lucide="headphones"></i></div>
                         </div>
@@ -381,6 +381,10 @@
     </div>
 
     <script>
+        // --- YOUR BACKEND CONNECTION ---
+        // Paste your live Render URL right here (keep the quotes, no trailing slash)
+        const BACKEND_URL = 'https://cowboy-clean-server.onrender.com';
+
         // Initialize Icons
         lucide.createIcons();
 
@@ -403,10 +407,37 @@
             if(tabId === 'spotify') renderCitiesChart();
         }
 
-        function refreshData() {
+        async function refreshData() {
             const btn = document.querySelector('button[onclick="refreshData()"]');
             btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline mr-2"></i> Syncing...';
             lucide.createIcons();
+            
+            try {
+                // Fetch live data from your Render backend
+                const response = await fetch(`${BACKEND_URL}/api/spotify-stats`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Update the number on the dashboard
+                    const listenerElement = document.getElementById('spotify-listeners');
+                    if (listenerElement && data.listeners) {
+                        listenerElement.innerText = data.listeners.toLocaleString();
+                        
+                        // Briefly show a success state on the button
+                        btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 inline mr-2 text-green-400"></i> Synced!';
+                        lucide.createIcons();
+                        setTimeout(() => { btn.innerHTML = 'Refresh Data'; }, 2000);
+                        return;
+                    }
+                } else {
+                    console.error("Backend error:", response.status);
+                }
+            } catch (error) {
+                console.error("Failed to connect to backend:", error);
+            }
+            
+            // Reset button if fetch fails or takes too long
             setTimeout(() => {
                 btn.innerHTML = 'Refresh Data';
             }, 1000);
