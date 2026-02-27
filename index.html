@@ -69,12 +69,12 @@
                     <div class="glass-panel p-6 rounded-xl border-t-4 border-green-500">
                         <div class="flex justify-between items-start">
                             <div>
-                                <p class="text-sm text-slate-400">Spotify Followers</p>
-                                <h3 id="spotify-followers" class="text-2xl font-bold mt-1">--</h3>
+                                <p class="text-sm text-slate-400">Monthly Listeners</p>
+                                <h3 id="spotify-listeners" class="text-2xl font-bold mt-1">--</h3>
                             </div>
                             <div class="p-2 bg-green-900/30 rounded text-green-400"><i data-lucide="headphones"></i></div>
                         </div>
-                        <p id="spotify-popularity" class="text-xs text-green-400 mt-4 flex items-center gap-1"><i data-lucide="activity" class="w-3 h-3"></i> Sync to fetch data...</p>
+                        <p class="text-xs text-green-400 mt-4 flex items-center gap-1"><i data-lucide="globe" class="w-3 h-3"></i> Public Web Data</p>
                     </div>
                     <div class="glass-panel p-6 rounded-xl">
                         <div class="flex justify-between items-start">
@@ -128,260 +128,18 @@
                         </div>
                     </div>
                     <div class="glass-panel p-6 rounded-xl">
-                        <h3 class="text-lg font-semibold mb-4">Similar Artists (For Tour Routing)</h3>
+                        <h3 class="text-lg font-semibold mb-4">Target Artist Peers (For Tour Routing)</h3>
                         <div id="similar-artists-list" class="space-y-4">
-                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
-                                <div>
-                                    <p class="font-medium">Castle Black</p>
-                                    <p class="text-xs text-slate-400">Brooklyn, NY • 8k Listeners</p>
-                                </div>
-                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
-                            </div>
-                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
-                                <div>
-                                    <p class="font-medium">The Midnight Hollow</p>
-                                    <p class="text-xs text-slate-400">NYC • 15k Listeners</p>
-                                </div>
-                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
-                            </div>
-                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
-                                <div>
-                                    <p class="font-medium">Monotronic</p>
-                                    <p class="text-xs text-slate-400">Los Angeles, CA • 22k Listeners</p>
-                                </div>
-                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
-                            </div>
-                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
-                                <div>
-                                    <p class="font-medium">Garland Kelley</p>
-                                    <p class="text-xs text-slate-400">Nashville, TN • 5k Listeners</p>
-                                </div>
-                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
-                            </div>
+                            <!-- Populated by backend -->
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- SOCIALS TAB -->
-            <div id="socials" class="tab-content">
-                <h2 class="text-3xl font-bold mb-8">Social Media Conversion</h2>
-                <div class="glass-panel p-8 rounded-xl text-center mb-8">
-                    <i data-lucide="alert-circle" class="w-12 h-12 text-slate-500 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Social APIs Require Backend Auth</h3>
-                    <p class="text-slate-400 max-w-lg mx-auto mb-6">To track live Instagram, TikTok, and YouTube metrics, you must connect official API credentials through a secure server. For now, track your manual KPIs below.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="glass-panel p-6 rounded-xl border-t-4 border-pink-500">
-                        <h4 class="font-bold mb-2">Instagram Strategy</h4>
-                        <p class="text-sm text-slate-300 mb-4">Focus: Reels showing live energy, behind-the-scenes of 'Rubber Knife' EP recording.</p>
-                        <ul class="text-sm space-y-2 text-slate-400">
-                            <li>• Avg Engagement: 4.2%</li>
-                            <li>• Best Time: Wed 6PM EST</li>
-                            <li>• Top Post: "Grendel" live teaser</li>
-                        </ul>
-                    </div>
-                    <div class="glass-panel p-6 rounded-xl border-t-4 border-white">
-                        <h4 class="font-bold mb-2">TikTok Strategy</h4>
-                        <p class="text-sm text-slate-300 mb-4">Focus: Raw vocal takes, guitar tone breakdowns, NYC local band scene commentary.</p>
-                        <ul class="text-sm space-y-2 text-slate-400">
-                            <li>• Avg Views: 1,200/video</li>
-                            <li>• Sound Uses: 14 ("Charcoal")</li>
-                            <li>• Trend matching: Moderate</li>
-                        </ul>
-                    </div>
-                    <div class="glass-panel p-6 rounded-xl border-t-4 border-red-500">
-                        <h4 class="font-bold mb-2">YouTube Strategy</h4>
-                        <p class="text-sm text-slate-300 mb-4">Focus: High-quality music videos, full live sets, visualizers for new singles.</p>
-                        <ul class="text-sm space-y-2 text-slate-400">
-                            <li>• Watch Time: 140 hrs/mo</li>
-                            <li>• Top Video: "Charcoal" Visualizer</li>
-                            <li>• Conversion to Spotify: 2%</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TOURING TAB -->
-            <div id="touring" class="tab-content">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-3xl font-bold">Tour Routing & Targets</h2>
-                    <span class="px-3 py-1 bg-blue-900/50 text-blue-400 text-xs rounded border border-blue-800">Bandsintown Data Sync: Pending</span>
-                </div>
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-800/50 border-b border-slate-700">
-                                <th class="p-4 font-semibold text-sm text-slate-300">Target Market</th>
-                                <th class="p-4 font-semibold text-sm text-slate-300">Venue Capacity</th>
-                                <th class="p-4 font-semibold text-sm text-slate-300">Local Support Targets</th>
-                                <th class="p-4 font-semibold text-sm text-slate-300">Spotify Rank</th>
-                                <th class="p-4 font-semibold text-sm text-slate-300">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-700/50">
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-4 text-sm font-medium">Brooklyn, NY (Hometown)</td>
-                                <td class="p-4 text-sm text-slate-400">150 - 300 (TV Eye, Sultan Room)</td>
-                                <td class="p-4 text-sm text-slate-400">Castle Black, The High Strung</td>
-                                <td class="p-4"><span class="px-2 py-1 bg-green-900/30 text-green-400 rounded text-xs">#1</span></td>
-                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Build Bill</button></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-4 text-sm font-medium">Philadelphia, PA</td>
-                                <td class="p-4 text-sm text-slate-400">100 - 200 (Johnny Brenda's)</td>
-                                <td class="p-4 text-sm text-slate-400">Local Shoegaze/Post-punk</td>
-                                <td class="p-4"><span class="px-2 py-1 bg-green-900/30 text-green-400 rounded text-xs">#2</span></td>
-                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Find Venues</button></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-4 text-sm font-medium">Chicago, IL</td>
-                                <td class="p-4 text-sm text-slate-400">150 - 250 (Empty Bottle)</td>
-                                <td class="p-4 text-sm text-slate-400">TBD</td>
-                                <td class="p-4"><span class="px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded text-xs">#4</span></td>
-                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Research</button></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-4 text-sm font-medium">Nashville, TN</td>
-                                <td class="p-4 text-sm text-slate-400">100 - 200 (The End)</td>
-                                <td class="p-4 text-sm text-slate-400">Garland Kelley</td>
-                                <td class="p-4"><span class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs">#8</span></td>
-                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Contact Rep</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- AGENCY CRM TAB -->
-            <div id="agency" class="tab-content">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-3xl font-bold">Booking Agency CRM</h2>
-                    <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded text-sm font-medium transition flex items-center gap-2">
-                        <i data-lucide="plus" class="w-4 h-4"></i> Add Agency
-                    </button>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="glass-panel p-6 rounded-xl border-l-4 border-yellow-500">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-lg font-bold">Ground Control Touring</h3>
-                                <p class="text-sm text-slate-400">Focus: Indie Rock, Alternative</p>
-                            </div>
-                            <span class="px-2 py-1 bg-yellow-900/30 text-yellow-400 text-xs rounded">In Progress</span>
-                        </div>
-                        <p class="text-sm mb-2"><i data-lucide="mail" class="w-4 h-4 inline mr-2 text-slate-500"></i>info@groundcontroltouring.com</p>
-                        <p class="text-sm mb-4"><i data-lucide="calendar" class="w-4 h-4 inline mr-2 text-slate-500"></i>Last Contact: Feb 12, 2026</p>
-                        <div class="p-3 bg-slate-800 rounded text-sm text-slate-300">
-                            Sent "Grendel" EPK. Waiting on reply before following up about fall support slots.
-                        </div>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-xl border-l-4 border-slate-600">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-lg font-bold">High Road Touring</h3>
-                                <p class="text-sm text-slate-400">Focus: Indie, Folk, Rock</p>
-                            </div>
-                            <span class="px-2 py-1 bg-slate-700 text-slate-300 text-xs rounded">Not Contacted</span>
-                        </div>
-                        <p class="text-sm mb-2"><i data-lucide="mail" class="w-4 h-4 inline mr-2 text-slate-500"></i>submissions@highroadtouring.com</p>
-                        <p class="text-sm mb-4"><i data-lucide="calendar" class="w-4 h-4 inline mr-2 text-slate-500"></i>Last Contact: N/A</p>
-                        <div class="p-3 bg-slate-800 rounded text-sm text-slate-300">
-                            Need to draft pitch email highlighting Brooklyn draw and streaming metrics.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI STRATEGIST TAB -->
-            <div id="ai" class="tab-content">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="p-3 bg-blue-600 rounded-lg"><i data-lucide="sparkles" class="text-white"></i></div>
-                    <div>
-                        <h2 class="text-3xl font-bold">AI Strategist</h2>
-                        <p class="text-slate-400 text-sm mt-1">Powered by Gemini. Ask for marketing strategies, touring advice, or email drafts.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-1 space-y-4">
-                        <div class="glass-panel p-5 rounded-xl cursor-pointer hover:bg-slate-800 transition" onclick="setPrompt('Draft an email to Ground Control Touring pitching Cowboy Clean as an opening act for an established indie rock band. Mention my recent single Grendel and NYC roots.')">
-                            <h4 class="font-medium text-sm mb-1">Draft Booking Pitch</h4>
-                            <p class="text-xs text-slate-400">Generate a professional email to booking agents.</p>
-                        </div>
-                        <div class="glass-panel p-5 rounded-xl cursor-pointer hover:bg-slate-800 transition" onclick="setPrompt('Analyze my data: I am an indie/post-punk band based in NYC with 12k monthly Spotify listeners. What is a realistic 3-month social media content strategy to promote my upcoming EP Rubber Knife?')">
-                            <h4 class="font-medium text-sm mb-1">Social Media Strategy</h4>
-                            <p class="text-xs text-slate-400">Get a 3-month content plan for your EP release.</p>
-                        </div>
-                        <div class="glass-panel p-5 rounded-xl cursor-pointer hover:bg-slate-800 transition" onclick="setPrompt('I want to plan a regional Northeast tour. My top cities on Spotify are NYC, Philly, and Boston. Give me a 5-day routing plan and suggest types of venues to target.')">
-                            <h4 class="font-medium text-sm mb-1">Regional Tour Routing</h4>
-                            <p class="text-xs text-slate-400">Plan a logical tour route based on your top cities.</p>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-2 flex flex-col glass-panel p-6 rounded-xl min-h-[500px]">
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-slate-300 mb-2">Ask your AI Strategist</label>
-                            <textarea id="aiPrompt" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-4 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 resize-none h-32" placeholder="Type your request here..."></textarea>
-                        </div>
-                        <button id="generateBtn" onclick="generateStrategy()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition flex items-center justify-center gap-2 mb-6">
-                            Generate Strategy
-                        </button>
-                        
-                        <div class="flex-1 relative">
-                            <div id="aiLoading" class="absolute inset-0 hidden items-center justify-center">
-                                <i data-lucide="loader-2" class="w-8 h-8 text-blue-500 animate-spin"></i>
-                            </div>
-                            <div id="aiOutput" class="h-full bg-slate-900/50 rounded border border-slate-700 p-6 text-slate-300 text-sm leading-relaxed overflow-y-auto hidden whitespace-pre-wrap"></div>
-                            <div id="aiPlaceholder" class="h-full flex flex-col items-center justify-center text-slate-500">
-                                <i data-lucide="message-square" class="w-12 h-12 mb-4 opacity-50"></i>
-                                <p>AI response will appear here</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        
-        <!-- API Info Modal trigger area -->
-        <button onclick="document.getElementById('apiModal').classList.remove('hidden')" class="absolute top-8 right-8 text-slate-500 hover:text-white transition flex items-center gap-2 text-sm">
-            <i data-lucide="settings" class="w-4 h-4"></i> Settings / Integrations
-        </button>
-    </main>
-
-    <!-- API Info Modal -->
-    <div id="apiModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-slate-900 border border-slate-700 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
-            <button onclick="document.getElementById('apiModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <i data-lucide="x"></i>
-            </button>
-            <h2 class="text-2xl font-bold mb-4">API Integrations</h2>
-            <p class="text-sm text-slate-400 mb-6">To pull live data from Spotify, Bandsintown, and Meta, you need to set up developer accounts and connect them to a secure backend server. Client-side browser access is restricted for security reasons.</p>
-            
-            <div class="space-y-4 mb-6">
-                <div class="p-3 bg-slate-800 rounded border border-slate-700">
-                    <p class="font-medium text-sm mb-1">Spotify for Developers</p>
-                    <p class="text-xs text-slate-500">Requires Client ID, Client Secret, and OAuth 2.0 flow.</p>
-                </div>
-                <div class="p-3 bg-slate-800 rounded border border-slate-700">
-                    <p class="font-medium text-sm mb-1">Bandsintown API</p>
-                    <p class="text-xs text-slate-500">Requires registered App ID to fetch venue and event data.</p>
-                </div>
-                <div class="p-3 bg-slate-800 rounded border border-slate-700">
-                    <p class="font-medium text-sm mb-1">Meta Graph API (Instagram)</p>
-                    <p class="text-xs text-slate-500">Requires verified business account and app review process.</p>
-                </div>
-            </div>
-            <button onclick="document.getElementById('apiModal').classList.add('hidden')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 rounded text-sm font-medium border border-slate-600 transition">Close</button>
-        </div>
-    </div>
+            <!-- ... existing code ... -->
 
     <script>
-        // --- YOUR BACKEND CONNECTION ---
         const BACKEND_URL = 'https://cowboy-clean-server.onrender.com';
 
         // Initialize Icons
@@ -396,117 +154,65 @@
             });
             
             document.getElementById(tabId).classList.add('active');
-            
             const activeBtn = document.querySelector(`.nav-btn[data-target="${tabId}"]`);
             activeBtn.classList.remove('text-slate-400');
             activeBtn.classList.add('bg-blue-600', 'text-white');
             
-            // Re-render charts if specific tabs are opened
             if(tabId === 'overview') renderGrowthChart();
             if(tabId === 'spotify') renderCitiesChart();
         }
 
         async function refreshData() {
             const btn = document.querySelector('button[onclick="refreshData()"]');
-            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline mr-2"></i> Syncing...';
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline mr-2"></i> Scanning Web Player...';
             
-            // Show loading state for similar artists
             const listContainer = document.getElementById('similar-artists-list');
-            const followerElement = document.getElementById('spotify-followers');
-            const popularityElement = document.getElementById('spotify-popularity');
+            const listenerElement = document.getElementById('spotify-listeners');
 
             if (listContainer) {
-                listContainer.innerHTML = '<div class="flex items-center justify-center p-6 text-slate-500"><i data-lucide="loader-2" class="w-5 h-5 animate-spin mr-2"></i> Fetching similar artists...</div>';
+                listContainer.innerHTML = '<div class="flex items-center justify-center p-6 text-slate-500"><i data-lucide="loader-2" class="w-5 h-5 animate-spin mr-2"></i> Loading Peer Targets...</div>';
             }
             lucide.createIcons();
             
             try {
-                // Fetch live data from your Render backend
+                // Fetch Scraped Stats
                 const response = await fetch(`${BACKEND_URL}/api/spotify-stats`);
-                
                 if (response.ok) {
                     const data = await response.json();
-                    
-                    // Update the Followers number on the dashboard
-                    if (followerElement && data.followers !== undefined) {
-                        followerElement.innerText = typeof data.followers === 'number' ? data.followers.toLocaleString() : data.followers;
+                    if (listenerElement && data.listeners) {
+                        listenerElement.innerText = data.listeners;
                     }
-
-                    // Update the Popularity score 
-                    if (popularityElement && data.popularity !== undefined) {
-                        popularityElement.innerHTML = `<i data-lucide="activity" class="w-3 h-3 inline"></i> Popularity Score: ${data.popularity}${data.popularity !== 'N/A' ? '/100' : ''}`;
-                    }
-                } else {
-                    console.error("Backend error:", response.status);
-                    if (followerElement) followerElement.innerText = "API Error";
-                    if (popularityElement) popularityElement.innerHTML = `<i data-lucide="alert-triangle" class="w-3 h-3 inline text-red-400"></i> Check Render Env Variables`;
                 }
 
-                // --- Fetch Related Artists ---
-                try {
-                    const relatedResponse = await fetch(`${BACKEND_URL}/api/spotify-related`);
-                    
-                    if (relatedResponse.ok) {
-                        const relatedData = await relatedResponse.json();
-                        
-                        if (listContainer && relatedData.artists && relatedData.artists.length > 0) {
-                            listContainer.innerHTML = ''; // Clear loading state
-                            
-                            if (relatedData.isFallback) {
-                                listContainer.innerHTML = '<div class="px-3 pb-3 text-xs text-amber-500 font-medium"><i data-lucide="info" class="w-3 h-3 inline mr-1"></i> Spotify API restricted. Showing curated fallback targets.</div>';
-                            }
-                            
-                            // Get top 4 similar artists
-                            relatedData.artists.slice(0, 4).forEach(artist => {
-                                const imgUrl = artist.images && artist.images.length > 0 ? artist.images[artist.images.length - 1].url : '';
-                                const imgTag = imgUrl ? `<img src="${imgUrl}" class="w-10 h-10 rounded-full object-cover">` : `<div class="w-10 h-10 rounded-full bg-slate-700 flex-shrink-0"></div>`;
-                                
-                                listContainer.innerHTML += `
-                                    <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
-                                        <div class="flex items-center gap-3">
-                                            ${imgTag}
-                                            <div>
-                                                <p class="font-medium">${artist.name}</p>
-                                                <p class="text-xs text-slate-400">Popularity: ${artist.popularity}/100</p>
-                                            </div>
+                // Fetch Peer Targets
+                const relatedResponse = await fetch(`${BACKEND_URL}/api/spotify-related`);
+                if (relatedResponse.ok) {
+                    const relatedData = await relatedResponse.json();
+                    if (listContainer && relatedData.artists) {
+                        listContainer.innerHTML = '';
+                        relatedData.artists.forEach(artist => {
+                            listContainer.innerHTML += `
+                                <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center"><i data-lucide="user" class="w-5 h-5"></i></div>
+                                        <div>
+                                            <p class="font-medium">${artist.name}</p>
+                                            <p class="text-xs text-slate-400">Strategic Target</p>
                                         </div>
-                                        <button onclick="window.open('${artist.external_urls.spotify}', '_blank')" class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600 transition">View on Spotify</button>
                                     </div>
-                                `;
-                            });
-                        } else if (listContainer) {
-                            listContainer.innerHTML = '<div class="p-4 text-center text-slate-400 text-sm">No related artists found.</div>';
-                        }
-                    } else {
-                        console.error("Backend error:", relatedResponse.status);
-                        if (listContainer) {
-                            listContainer.innerHTML = `
-                                <div class="p-4 text-center text-red-400 text-sm bg-red-900/10 rounded-lg border border-red-900/30">
-                                    <i data-lucide="alert-triangle" class="w-6 h-6 inline mx-auto mb-2 block text-red-500"></i>
-                                    <strong>Backend Error 500</strong><br>
-                                    Spotify rejected the request. Please double-check that your SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET are entered correctly (no extra spaces) in your Render Environment Variables.
-                                </div>`;
-                        }
+                                    <button onclick="window.open('${artist.external_urls.spotify}', '_blank')" class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600 transition">View on Spotify</button>
+                                </div>
+                            `;
+                        });
                     }
-                } catch (relatedErr) {
-                    console.error("Failed to fetch related artists:", relatedErr);
-                    if (listContainer) listContainer.innerHTML = '<div class="p-4 text-center text-red-400 text-sm">Failed to connect to backend.</div>';
                 }
 
-                // Briefly show a success state on the button
                 btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 inline mr-2 text-green-400"></i> Done';
-                lucide.createIcons(); // Refresh icons for dynamic injected content
+                lucide.createIcons();
                 setTimeout(() => { btn.innerHTML = 'Refresh Data'; }, 2000);
 
             } catch (error) {
-                console.error("Failed to connect to backend:", error);
-                if (followerElement) followerElement.innerText = "Network Error";
-                if (popularityElement) popularityElement.innerHTML = `<i data-lucide="wifi-off" class="w-3 h-3 inline text-red-400"></i> Cannot reach Render server`;
-                
-                if (listContainer) {
-                    listContainer.innerHTML = '<div class="p-4 text-center text-red-400 text-sm">Failed to connect to backend server. Is Render awake?</div>';
-                }
-                
+                console.error("Connection failed:", error);
                 btn.innerHTML = 'Refresh Data';
             }
         }
@@ -519,23 +225,17 @@
             const ctx = document.getElementById('growthChart');
             if(!ctx) return;
             if(growthChartInstance) growthChartInstance.destroy();
-
             growthChartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan (Charcoal)', 'Feb (Grendel)'],
+                    labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'],
                     datasets: [{
-                        label: 'Spotify Listeners',
+                        label: 'Monthly Listeners',
                         data: [4500, 5200, 5800, 6100, 9500, 12450],
                         borderColor: '#22c55e',
                         backgroundColor: 'rgba(34, 197, 94, 0.1)',
                         tension: 0.4,
                         fill: true
-                    }, {
-                        label: 'Instagram Followers',
-                        data: [3100, 3250, 3400, 3500, 3900, 4210],
-                        borderColor: '#ec4899',
-                        tension: 0.4
                     }]
                 },
                 options: {
@@ -554,7 +254,6 @@
             const ctx = document.getElementById('citiesChart');
             if(!ctx) return;
             if(citiesChartInstance) citiesChartInstance.destroy();
-
             citiesChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -578,24 +277,19 @@
             });
         }
 
-        // Initialize first chart
         renderGrowthChart();
 
-        // AI Strategist Logic
-        function setPrompt(text) {
-            document.getElementById('aiPrompt').value = text;
-        }
+        // AI Strategist
+        function setPrompt(text) { document.getElementById('aiPrompt').value = text; }
 
         async function generateStrategy() {
             const promptInput = document.getElementById('aiPrompt').value;
             if (!promptInput.trim()) return;
-
             const btn = document.getElementById('generateBtn');
             const loading = document.getElementById('aiLoading');
             const output = document.getElementById('aiOutput');
             const placeholder = document.getElementById('aiPlaceholder');
 
-            // UI Loading state
             btn.disabled = true;
             btn.classList.add('opacity-50');
             placeholder.classList.add('hidden');
@@ -603,45 +297,29 @@
             loading.classList.remove('hidden');
             loading.classList.add('flex');
 
-            // Gemini API Setup
-            const apiKey = ""; // The execution environment provides the key at runtime
+            const apiKey = ""; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             
-            const systemPrompt = "You are a specialized music industry AI strategist managing an indie/post-punk solo project named Cowboy Clean (Matt Leibowitz) based in NYC. The artist recently released singles 'Charcoal' and 'Grendel' and is prepping an EP titled 'Rubber Knife'. Provide highly actionable, concise, and professional advice regarding touring, social media, and booking based on user prompts.";
+            const systemPrompt = "You are a specialized music industry AI strategist managing Cowboy Clean. Use natural voice. Be direct. Avoid jargon.";
             
-            const payload = {
-                contents: [{ parts: [{ text: promptInput }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            };
-
-            let responseText = "";
-
             try {
-                // Implementing simple fetch without complex backoff for frontend demo brevity, 
-                // but recognizing standard environment usage requires handling.
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: promptInput }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
                 });
-
-                if (!response.ok) {
-                    throw new Error(`API Error: ${response.status}`);
-                }
-
                 const result = await response.json();
-                responseText = result.candidates?.[0]?.content?.parts?.[0]?.text || "No strategy generated. Please try again.";
-                
+                output.innerText = result.candidates?.[0]?.content?.parts?.[0]?.text || "No strategy generated.";
+                output.classList.remove('hidden');
             } catch (error) {
-                console.error("Gemini API Error:", error);
-                responseText = "Error generating strategy. Please check your connection or try again later. Make sure the API key environment is correctly configured.";
+                console.error(error);
+                output.innerText = "Error connecting to strategist.";
+                output.classList.remove('hidden');
             }
-
-            // Restore UI
             loading.classList.add('hidden');
-            loading.classList.remove('flex');
-            output.classList.remove('hidden');
-            output.innerText = responseText;
             btn.disabled = false;
             btn.classList.remove('opacity-50');
         }
