@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cowboy Clean | Analytics & Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: #f8fafc; /* Slate 50 */
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7); /* Slate 800 */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased">
+
+    <!-- Sidebar Navigation -->
+    <nav class="w-64 glass-panel h-full flex flex-col border-r border-slate-700 z-10 flex-shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold tracking-tighter uppercase text-white">Cowboy Clean</h1>
+            <p class="text-xs text-slate-400 mt-1">Command Center</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1 px-3">
+                <li><button onclick="switchTab('overview')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium transition-colors bg-blue-600 text-white" data-target="overview"><i data-lucide="layout-dashboard"></i> Overview</button></li>
+                <li><button onclick="switchTab('spotify')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-target="spotify"><i data-lucide="music"></i> Spotify Data</button></li>
+                <li><button onclick="switchTab('socials')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-target="socials"><i data-lucide="smartphone"></i> Socials</button></li>
+                <li><button onclick="switchTab('touring')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-target="touring"><i data-lucide="map-pin"></i> Touring & Routing</button></li>
+                <li><button onclick="switchTab('agency')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-target="agency"><i data-lucide="briefcase"></i> Agency CRM</button></li>
+                <li><button onclick="switchTab('ai')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-target="ai"><i data-lucide="bot"></i> AI Strategist</button></li>
+            </ul>
+        </div>
+        <div class="p-4 border-t border-slate-700 text-xs text-slate-500">
+            <p>NYC • Post-Punk • Indie</p>
+            <p class="mt-1">Current Focus: Rubber Knife EP</p>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto bg-slate-900 relative">
+        <div class="max-w-7xl mx-auto p-8">
+
+            <!-- OVERVIEW TAB -->
+            <div id="overview" class="tab-content active">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold">Platform Overview</h2>
+                    <button class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded text-sm font-medium border border-slate-600 transition" onclick="refreshData()">Refresh Data</button>
+                </div>
+                
+                <!-- Stat Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-slate-400">Spotify Monthly Listeners</p>
+                                <h3 class="text-2xl font-bold mt-1">12,450</h3>
+                            </div>
+                            <div class="p-2 bg-green-900/30 rounded text-green-400"><i data-lucide="headphones"></i></div>
+                        </div>
+                        <p class="text-xs text-green-400 mt-4 flex items-center gap-1"><i data-lucide="trending-up" class="w-3 h-3"></i> +14% since "Grendel" release</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-slate-400">Instagram Followers</p>
+                                <h3 class="text-2xl font-bold mt-1">4,210</h3>
+                            </div>
+                            <div class="p-2 bg-pink-900/30 rounded text-pink-400"><i data-lucide="instagram"></i></div>
+                        </div>
+                        <p class="text-xs text-green-400 mt-4 flex items-center gap-1"><i data-lucide="trending-up" class="w-3 h-3"></i> +5% this month</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-slate-400">TikTok Followers</p>
+                                <h3 class="text-2xl font-bold mt-1">1,850</h3>
+                            </div>
+                            <div class="p-2 bg-slate-700/50 rounded text-white"><i data-lucide="music-2"></i></div>
+                        </div>
+                        <p class="text-xs text-green-400 mt-4 flex items-center gap-1"><i data-lucide="trending-up" class="w-3 h-3"></i> +22% this month</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-slate-400">YouTube Subscribers</p>
+                                <h3 class="text-2xl font-bold mt-1">890</h3>
+                            </div>
+                            <div class="p-2 bg-red-900/30 rounded text-red-400"><i data-lucide="youtube"></i></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-4 flex items-center gap-1"><i class="w-3 h-3" data-lucide="minus"></i> Flat growth</p>
+                    </div>
+                </div>
+
+                <!-- Main Chart -->
+                <div class="glass-panel p-6 rounded-xl mb-8">
+                    <h3 class="text-lg font-semibold mb-4">Audience Growth (Last 6 Months)</h3>
+                    <div class="h-72 w-full">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPOTIFY TAB -->
+            <div id="spotify" class="tab-content">
+                <h2 class="text-3xl font-bold mb-8">Spotify Deep Dive</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div class="glass-panel p-6 rounded-xl">
+                        <h3 class="text-lg font-semibold mb-4">Top Listener Locations</h3>
+                        <div class="h-64">
+                            <canvas id="citiesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl">
+                        <h3 class="text-lg font-semibold mb-4">Similar Artists (For Tour Routing)</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
+                                <div>
+                                    <p class="font-medium">Castle Black</p>
+                                    <p class="text-xs text-slate-400">Brooklyn, NY • 8k Listeners</p>
+                                </div>
+                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
+                            </div>
+                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
+                                <div>
+                                    <p class="font-medium">The Midnight Hollow</p>
+                                    <p class="text-xs text-slate-400">NYC • 15k Listeners</p>
+                                </div>
+                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
+                            </div>
+                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
+                                <div>
+                                    <p class="font-medium">Monotronic</p>
+                                    <p class="text-xs text-slate-400">Los Angeles, CA • 22k Listeners</p>
+                                </div>
+                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
+                            </div>
+                            <div class="flex justify-between items-center p-3 hover:bg-slate-800 rounded transition border border-transparent hover:border-slate-700">
+                                <div>
+                                    <p class="font-medium">Garland Kelley</p>
+                                    <p class="text-xs text-slate-400">Nashville, TN • 5k Listeners</p>
+                                </div>
+                                <button class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600">Pitch Tour</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOCIALS TAB -->
+            <div id="socials" class="tab-content">
+                <h2 class="text-3xl font-bold mb-8">Social Media Conversion</h2>
+                <div class="glass-panel p-8 rounded-xl text-center mb-8">
+                    <i data-lucide="alert-circle" class="w-12 h-12 text-slate-500 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Social APIs Require Backend Auth</h3>
+                    <p class="text-slate-400 max-w-lg mx-auto mb-6">To track live Instagram, TikTok, and YouTube metrics, you must connect official API credentials through a secure server. For now, track your manual KPIs below.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 rounded-xl border-t-4 border-pink-500">
+                        <h4 class="font-bold mb-2">Instagram Strategy</h4>
+                        <p class="text-sm text-slate-300 mb-4">Focus: Reels showing live energy, behind-the-scenes of 'Rubber Knife' EP recording.</p>
+                        <ul class="text-sm space-y-2 text-slate-400">
+                            <li>• Avg Engagement: 4.2%</li>
+                            <li>• Best Time: Wed 6PM EST</li>
+                            <li>• Top Post: "Grendel" live teaser</li>
+                        </ul>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl border-t-4 border-white">
+                        <h4 class="font-bold mb-2">TikTok Strategy</h4>
+                        <p class="text-sm text-slate-300 mb-4">Focus: Raw vocal takes, guitar tone breakdowns, NYC local band scene commentary.</p>
+                        <ul class="text-sm space-y-2 text-slate-400">
+                            <li>• Avg Views: 1,200/video</li>
+                            <li>• Sound Uses: 14 ("Charcoal")</li>
+                            <li>• Trend matching: Moderate</li>
+                        </ul>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl border-t-4 border-red-500">
+                        <h4 class="font-bold mb-2">YouTube Strategy</h4>
+                        <p class="text-sm text-slate-300 mb-4">Focus: High-quality music videos, full live sets, visualizers for new singles.</p>
+                        <ul class="text-sm space-y-2 text-slate-400">
+                            <li>• Watch Time: 140 hrs/mo</li>
+                            <li>• Top Video: "Charcoal" Visualizer</li>
+                            <li>• Conversion to Spotify: 2%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOURING TAB -->
+            <div id="touring" class="tab-content">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold">Tour Routing & Targets</h2>
+                    <span class="px-3 py-1 bg-blue-900/50 text-blue-400 text-xs rounded border border-blue-800">Bandsintown Data Sync: Pending</span>
+                </div>
+                <div class="glass-panel rounded-xl overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-800/50 border-b border-slate-700">
+                                <th class="p-4 font-semibold text-sm text-slate-300">Target Market</th>
+                                <th class="p-4 font-semibold text-sm text-slate-300">Venue Capacity</th>
+                                <th class="p-4 font-semibold text-sm text-slate-300">Local Support Targets</th>
+                                <th class="p-4 font-semibold text-sm text-slate-300">Spotify Rank</th>
+                                <th class="p-4 font-semibold text-sm text-slate-300">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700/50">
+                            <tr class="hover:bg-slate-800/30 transition">
+                                <td class="p-4 text-sm font-medium">Brooklyn, NY (Hometown)</td>
+                                <td class="p-4 text-sm text-slate-400">150 - 300 (TV Eye, Sultan Room)</td>
+                                <td class="p-4 text-sm text-slate-400">Castle Black, The High Strung</td>
+                                <td class="p-4"><span class="px-2 py-1 bg-green-900/30 text-green-400 rounded text-xs">#1</span></td>
+                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Build Bill</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition">
+                                <td class="p-4 text-sm font-medium">Philadelphia, PA</td>
+                                <td class="p-4 text-sm text-slate-400">100 - 200 (Johnny Brenda's)</td>
+                                <td class="p-4 text-sm text-slate-400">Local Shoegaze/Post-punk</td>
+                                <td class="p-4"><span class="px-2 py-1 bg-green-900/30 text-green-400 rounded text-xs">#2</span></td>
+                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Find Venues</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition">
+                                <td class="p-4 text-sm font-medium">Chicago, IL</td>
+                                <td class="p-4 text-sm text-slate-400">150 - 250 (Empty Bottle)</td>
+                                <td class="p-4 text-sm text-slate-400">TBD</td>
+                                <td class="p-4"><span class="px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded text-xs">#4</span></td>
+                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Research</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition">
+                                <td class="p-4 text-sm font-medium">Nashville, TN</td>
+                                <td class="p-4 text-sm text-slate-400">100 - 200 (The End)</td>
+                                <td class="p-4 text-sm text-slate-400">Garland Kelley</td>
+                                <td class="p-4"><span class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs">#8</span></td>
+                                <td class="p-4"><button class="text-blue-400 hover:text-blue-300 text-sm">Contact Rep</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- AGENCY CRM TAB -->
+            <div id="agency" class="tab-content">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold">Booking Agency CRM</h2>
+                    <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded text-sm font-medium transition flex items-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Add Agency
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-panel p-6 rounded-xl border-l-4 border-yellow-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold">Ground Control Touring</h3>
+                                <p class="text-sm text-slate-400">Focus: Indie Rock, Alternative</p>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-900/30 text-yellow-400 text-xs rounded">In Progress</span>
+                        </div>
+                        <p class="text-sm mb-2"><i data-lucide="mail" class="w-4 h-4 inline mr-2 text-slate-500"></i>info@groundcontroltouring.com</p>
+                        <p class="text-sm mb-4"><i data-lucide="calendar" class="w-4 h-4 inline mr-2 text-slate-500"></i>Last Contact: Feb 12, 2026</p>
+                        <div class="p-3 bg-slate-800 rounded text-sm text-slate-300">
+                            Sent "Grendel" EPK. Waiting on reply before following up about fall support slots.
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-xl border-l-4 border-slate-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold">High Road Touring</h3>
+                                <p class="text-sm text-slate-400">Focus: Indie, Folk, Rock</p>
+                            </div>
+                            <span class="px-2 py-1 bg-slate-700 text-slate-300 text-xs rounded">Not Contacted</span>
+                        </div>
+                        <p class="text-sm mb-2"><i data-lucide="mail" class="w-4 h-4 inline mr-2 text-slate-500"></i>submissions@highroadtouring.com</p>
+                        <p class="text-sm mb-4"><i data-lucide="calendar" class="w-4 h-4 inline mr-2 text-slate-500"></i>Last Contact: N/A</p>
+                        <div class="p-3 bg-slate-800 rounded text-sm text-slate-300">
+                            Need to draft pitch email highlighting Brooklyn draw and streaming metrics.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI STRATEGIST TAB -->
+            <div id="ai" class="tab-content">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-3 bg-blue-600 rounded-lg"><i data-lucide="sparkles" class="text-white"></i></div>
+                    <div>
+                        <h2 class="text-3xl font-bold">AI Strategist</h2>
+                        <p class="text-slate-400 text-sm mt-1">Powered by Gemini. Ask for marketing strategies, touring advice, or email drafts.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 space-y-4">
+                        <div class="glass-panel p-5 rounded-xl cursor-pointer hover:bg-slate-800 transition" onclick="setPrompt('Draft an email to Ground Control Touring pitching Cowboy Clean as an opening act for an established indie rock band. Mention my recent single Grendel and NYC roots.')">
+                            <h4 class="font-medium text-sm mb-1">Draft Booking Pitch</h4>
+                            <p class="text-xs text-slate-400">Generate a professional email to booking agents.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-xl cursor-pointer hover:bg-slate-800 transition" onclick="setPrompt('Analyze my data: I am an indie/post-punk band based in NYC with 12k monthly Spotify listeners. What is a realistic 3-month social media content strategy to promote my upcoming EP Rubber Knife?')">
+                            <h4 class="font-medium text-sm mb-1">Social Media Strategy</h4>
+                            <p class="text-xs text-slate-400">Get a 3-month content plan for your EP release.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-xl cursor-pointer hover:bg-slate-800 transition" onclick="setPrompt('I want to plan a regional Northeast tour. My top cities on Spotify are NYC, Philly, and Boston. Give me a 5-day routing plan and suggest types of venues to target.')">
+                            <h4 class="font-medium text-sm mb-1">Regional Tour Routing</h4>
+                            <p class="text-xs text-slate-400">Plan a logical tour route based on your top cities.</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2 flex flex-col glass-panel p-6 rounded-xl min-h-[500px]">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Ask your AI Strategist</label>
+                            <textarea id="aiPrompt" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-4 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 resize-none h-32" placeholder="Type your request here..."></textarea>
+                        </div>
+                        <button id="generateBtn" onclick="generateStrategy()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition flex items-center justify-center gap-2 mb-6">
+                            Generate Strategy
+                        </button>
+                        
+                        <div class="flex-1 relative">
+                            <div id="aiLoading" class="absolute inset-0 hidden items-center justify-center">
+                                <i data-lucide="loader-2" class="w-8 h-8 text-blue-500 animate-spin"></i>
+                            </div>
+                            <div id="aiOutput" class="h-full bg-slate-900/50 rounded border border-slate-700 p-6 text-slate-300 text-sm leading-relaxed overflow-y-auto hidden whitespace-pre-wrap"></div>
+                            <div id="aiPlaceholder" class="h-full flex flex-col items-center justify-center text-slate-500">
+                                <i data-lucide="message-square" class="w-12 h-12 mb-4 opacity-50"></i>
+                                <p>AI response will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- API Info Modal trigger area -->
+        <button onclick="document.getElementById('apiModal').classList.remove('hidden')" class="absolute top-8 right-8 text-slate-500 hover:text-white transition flex items-center gap-2 text-sm">
+            <i data-lucide="settings" class="w-4 h-4"></i> Settings / Integrations
+        </button>
+    </main>
+
+    <!-- API Info Modal -->
+    <div id="apiModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
+            <button onclick="document.getElementById('apiModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x"></i>
+            </button>
+            <h2 class="text-2xl font-bold mb-4">API Integrations</h2>
+            <p class="text-sm text-slate-400 mb-6">To pull live data from Spotify, Bandsintown, and Meta, you need to set up developer accounts and connect them to a secure backend server. Client-side browser access is restricted for security reasons.</p>
+            
+            <div class="space-y-4 mb-6">
+                <div class="p-3 bg-slate-800 rounded border border-slate-700">
+                    <p class="font-medium text-sm mb-1">Spotify for Developers</p>
+                    <p class="text-xs text-slate-500">Requires Client ID, Client Secret, and OAuth 2.0 flow.</p>
+                </div>
+                <div class="p-3 bg-slate-800 rounded border border-slate-700">
+                    <p class="font-medium text-sm mb-1">Bandsintown API</p>
+                    <p class="text-xs text-slate-500">Requires registered App ID to fetch venue and event data.</p>
+                </div>
+                <div class="p-3 bg-slate-800 rounded border border-slate-700">
+                    <p class="font-medium text-sm mb-1">Meta Graph API (Instagram)</p>
+                    <p class="text-xs text-slate-500">Requires verified business account and app review process.</p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('apiModal').classList.add('hidden')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 rounded text-sm font-medium border border-slate-600 transition">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('bg-blue-600', 'text-white');
+                el.classList.add('text-slate-400');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            
+            const activeBtn = document.querySelector(`.nav-btn[data-target="${tabId}"]`);
+            activeBtn.classList.remove('text-slate-400');
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+            
+            // Re-render charts if specific tabs are opened
+            if(tabId === 'overview') renderGrowthChart();
+            if(tabId === 'spotify') renderCitiesChart();
+        }
+
+        function refreshData() {
+            const btn = document.querySelector('button[onclick="refreshData()"]');
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline mr-2"></i> Syncing...';
+            lucide.createIcons();
+            setTimeout(() => {
+                btn.innerHTML = 'Refresh Data';
+            }, 1000);
+        }
+
+        // Charts Logic
+        let growthChartInstance = null;
+        let citiesChartInstance = null;
+
+        function renderGrowthChart() {
+            const ctx = document.getElementById('growthChart');
+            if(!ctx) return;
+            if(growthChartInstance) growthChartInstance.destroy();
+
+            growthChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan (Charcoal)', 'Feb (Grendel)'],
+                    datasets: [{
+                        label: 'Spotify Listeners',
+                        data: [4500, 5200, 5800, 6100, 9500, 12450],
+                        borderColor: '#22c55e',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Instagram Followers',
+                        data: [3100, 3250, 3400, 3500, 3900, 4210],
+                        borderColor: '#ec4899',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#94a3b8' } } },
+                    scales: {
+                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
+                    }
+                }
+            });
+        }
+
+        function renderCitiesChart() {
+            const ctx = document.getElementById('citiesChart');
+            if(!ctx) return;
+            if(citiesChartInstance) citiesChartInstance.destroy();
+
+            citiesChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Brooklyn, NY', 'Chicago, IL', 'Los Angeles, CA', 'Philadelphia, PA', 'London, UK'],
+                    datasets: [{
+                        label: 'Listeners',
+                        data: [3200, 1800, 1500, 1100, 850],
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                    }
+                }
+            });
+        }
+
+        // Initialize first chart
+        renderGrowthChart();
+
+        // AI Strategist Logic
+        function setPrompt(text) {
+            document.getElementById('aiPrompt').value = text;
+        }
+
+        async function generateStrategy() {
+            const promptInput = document.getElementById('aiPrompt').value;
+            if (!promptInput.trim()) return;
+
+            const btn = document.getElementById('generateBtn');
+            const loading = document.getElementById('aiLoading');
+            const output = document.getElementById('aiOutput');
+            const placeholder = document.getElementById('aiPlaceholder');
+
+            // UI Loading state
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+            placeholder.classList.add('hidden');
+            output.classList.add('hidden');
+            loading.classList.remove('hidden');
+            loading.classList.add('flex');
+
+            // Gemini API Setup
+            const apiKey = ""; // The execution environment provides the key at runtime
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const systemPrompt = "You are a specialized music industry AI strategist managing an indie/post-punk solo project named Cowboy Clean (Matt Leibowitz) based in NYC. The artist recently released singles 'Charcoal' and 'Grendel' and is prepping an EP titled 'Rubber Knife'. Provide highly actionable, concise, and professional advice regarding touring, social media, and booking based on user prompts.";
+            
+            const payload = {
+                contents: [{ parts: [{ text: promptInput }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            let responseText = "";
+
+            try {
+                // Implementing simple fetch without complex backoff for frontend demo brevity, 
+                // but recognizing standard environment usage requires handling.
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const result = await response.json();
+                responseText = result.candidates?.[0]?.content?.parts?.[0]?.text || "No strategy generated. Please try again.";
+                
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                responseText = "Error generating strategy. Please check your connection or try again later. Make sure the API key environment is correctly configured.";
+            }
+
+            // Restore UI
+            loading.classList.add('hidden');
+            loading.classList.remove('flex');
+            output.classList.remove('hidden');
+            output.innerText = responseText;
+            btn.disabled = false;
+            btn.classList.remove('opacity-50');
+        }
+    </script>
+</body>
+</html>
